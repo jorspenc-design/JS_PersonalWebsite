@@ -51,25 +51,39 @@ document.addEventListener('DOMContentLoaded', () => {
     animationTargets.forEach(el => observer.observe(el));
   }
 
-  /* ── Email form handler — validates then lets native POST submit to Kit ── */
+  /* ── Email form handler — Kit v3 API ── */
+  const KIT_API_KEY = 'aFLElxvV-4xDYVRnpbCtOA';
+  const KIT_FORM_ID = '9468211';
+
   document.querySelectorAll('.email-form, #doorForm').forEach(form => {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
       const input = form.querySelector('input[type="email"]');
       const btn   = form.querySelector('.email-btn, .door-sub-btn');
 
-      // Block submit only if invalid email
       if (!input?.value || !input.value.includes('@')) {
-        e.preventDefault();
         input?.focus();
         return;
       }
 
-      // Valid — let the native form POST to Kit via the hidden iframe
-      // Update UI after a short delay
-      setTimeout(() => {
-        if (btn)   { btn.textContent = "You're in ✓"; btn.classList.add('sent'); btn.disabled = true; }
-        if (input) { input.disabled = true; }
-      }, 150);
+      if (btn) { btn.textContent = 'Subscribing…'; btn.disabled = true; }
+
+      try {
+        const res = await fetch(`https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify({ api_key: KIT_API_KEY, email: input.value.trim() })
+        });
+        const data = await res.json();
+        if (data.subscription) {
+          if (btn)   { btn.textContent = "You're in ✓"; btn.classList.add('sent'); }
+          if (input) { input.disabled = true; }
+        } else {
+          throw new Error('No subscription returned');
+        }
+      } catch {
+        if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
+      }
     });
   });
 
