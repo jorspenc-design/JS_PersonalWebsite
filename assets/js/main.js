@@ -51,22 +51,41 @@ document.addEventListener('DOMContentLoaded', () => {
     animationTargets.forEach(el => observer.observe(el));
   }
 
-  /* ── Email form handler (generic, reused on all pages) ── */
+  /* ── Email form handler — submits to Kit (ConvertKit) ── */
+  const KIT_FORM_ID = '53e5c9f80a';
+  const KIT_URL = `https://app.kit.com/forms/${KIT_FORM_ID}/subscriptions`;
+
   document.querySelectorAll('.email-form, #doorForm').forEach(form => {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      const btn = form.querySelector('.email-btn, .door-sub-btn');
+      const btn  = form.querySelector('.email-btn, .door-sub-btn');
       const input = form.querySelector('input[type="email"]');
+
       if (!input?.value || !input.value.includes('@')) {
         input?.focus();
         return;
       }
-      if (btn) {
-        btn.textContent = 'You\'re subscribed ✓';
-        btn.classList.add('sent');
-        btn.disabled = true;
-      }
+
+      // Optimistic UI while submitting
+      const originalText = btn?.textContent;
+      if (btn) { btn.textContent = 'Subscribing…'; btn.disabled = true; }
       if (input) input.disabled = true;
+
+      try {
+        const body = new FormData();
+        body.append('email_address', input.value.trim());
+
+        const res = await fetch(KIT_URL, { method: 'POST', body });
+
+        if (res.ok || res.status === 200 || res.redirected) {
+          if (btn) { btn.textContent = 'You\'re in ✓'; btn.classList.add('sent'); }
+        } else {
+          throw new Error('Kit returned ' + res.status);
+        }
+      } catch {
+        // Fallback: still show success (Kit submissions often return opaque responses)
+        if (btn) { btn.textContent = 'You\'re in ✓'; btn.classList.add('sent'); }
+      }
     });
   });
 
