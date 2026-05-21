@@ -51,55 +51,25 @@ document.addEventListener('DOMContentLoaded', () => {
     animationTargets.forEach(el => observer.observe(el));
   }
 
-  /* ── Email form handler — submits to Kit via hidden iframe (bypasses CORS) ── */
-  const KIT_URL = 'https://app.kit.com/forms/53e5c9f80a/subscriptions';
-
-  function submitToKit(email) {
-    // Create a hidden iframe so the POST doesn't navigate the page
-    const iframeName = 'kit-' + Date.now();
-    const iframe = document.createElement('iframe');
-    iframe.name = iframeName;
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    // Create a real form and submit it into the iframe
-    const hiddenForm = document.createElement('form');
-    hiddenForm.method = 'POST';
-    hiddenForm.action = KIT_URL;
-    hiddenForm.target = iframeName;
-
-    const emailInput = document.createElement('input');
-    emailInput.type = 'hidden';
-    emailInput.name = 'email_address';
-    emailInput.value = email;
-    hiddenForm.appendChild(emailInput);
-
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-
-    // Clean up after submission completes
-    setTimeout(() => {
-      document.body.removeChild(hiddenForm);
-      document.body.removeChild(iframe);
-    }, 5000);
-  }
-
+  /* ── Email form handler — validates then lets native POST submit to Kit ── */
   document.querySelectorAll('.email-form, #doorForm').forEach(form => {
     form.addEventListener('submit', e => {
-      e.preventDefault();
-      const btn   = form.querySelector('.email-btn, .door-sub-btn');
       const input = form.querySelector('input[type="email"]');
+      const btn   = form.querySelector('.email-btn, .door-sub-btn');
 
+      // Block submit only if invalid email
       if (!input?.value || !input.value.includes('@')) {
+        e.preventDefault();
         input?.focus();
         return;
       }
 
-      submitToKit(input.value.trim());
-
-      // Update UI immediately — Kit confirms via email to the subscriber
-      if (btn)   { btn.textContent = 'You\'re in ✓'; btn.classList.add('sent'); btn.disabled = true; }
-      if (input) { input.disabled = true; }
+      // Valid — let the native form POST to Kit via the hidden iframe
+      // Update UI after a short delay
+      setTimeout(() => {
+        if (btn)   { btn.textContent = "You're in ✓"; btn.classList.add('sent'); btn.disabled = true; }
+        if (input) { input.disabled = true; }
+      }, 150);
     });
   });
 

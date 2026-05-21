@@ -84,8 +84,9 @@
           <span class="overline">Newsletter</span>
           <h2>Stay in the loop.</h2>
           <p>Subscribe and I'll let you know when new teaching resources are available, along with my weekly note on AI, ministry, and the work of building well.</p>
-          <form class="email-form" novalidate>
-            <input type="email" class="email-input" placeholder="Your email address" required aria-label="Email address">
+          <iframe name="kit-frame" style="display:none;" aria-hidden="true" title="Kit form target"></iframe>
+          <form class="email-form" action="https://app.kit.com/forms/53e5c9f80a/subscriptions" method="post" target="kit-frame" novalidate>
+            <input type="email" name="email_address" class="email-input" placeholder="Your email address" required aria-label="Email address">
             <button type="submit" class="email-btn">Subscribe</button>
           </form>
           <p class="email-micro">Unsubscribe anytime. I respect your inbox.</p>

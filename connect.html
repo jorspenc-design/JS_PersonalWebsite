@@ -64,8 +64,9 @@
             <span class="overline">The weekly note</span>
             <h3>A quieter kind of newsletter.</h3>
             <p>A short letter most weeks. Sometimes about AI and the church, sometimes about leadership, sometimes about what I'm reading. The kind of thing I'd share over coffee.</p>
-            <form class="door-form" id="doorForm" novalidate>
-              <input type="email" class="door-input" placeholder="Your email address" required aria-label="Email address">
+            <iframe name="kit-frame-connect" style="display:none;" aria-hidden="true" title="Kit form target"></iframe>
+            <form class="door-form" id="doorForm" action="https://app.kit.com/forms/53e5c9f80a/subscriptions" method="post" target="kit-frame-connect" novalidate>
+              <input type="email" name="email_address" class="door-input" placeholder="Your email address" required aria-label="Email address">
               <button type="submit" class="email-btn door-sub-btn" style="margin-top:4px;">Subscribe</button>
             </form>
             <p class="email-micro" style="margin-top:12px;">Unsubscribe anytime. I respect your inbox.</p>

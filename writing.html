@@ -108,8 +108,9 @@
           <span class="overline">Newsletter</span>
           <h2>New essays straight to your inbox.</h2>
           <p>Most weeks I send a short note — sometimes a new essay, sometimes a reflection, sometimes something I'm reading. No hype. No hustle. Just the kind of thinking I'd share over coffee.</p>
-          <form class="email-form" novalidate>
-            <input type="email" class="email-input" placeholder="Your email address" required aria-label="Email address">
+          <iframe name="kit-frame" style="display:none;" aria-hidden="true" title="Kit form target"></iframe>
+          <form class="email-form" action="https://app.kit.com/forms/53e5c9f80a/subscriptions" method="post" target="kit-frame" novalidate>
+            <input type="email" name="email_address" class="email-input" placeholder="Your email address" required aria-label="Email address">
             <button type="submit" class="email-btn">Subscribe</button>
           </form>
           <p class="email-micro">Unsubscribe anytime. I respect your inbox.</p>
