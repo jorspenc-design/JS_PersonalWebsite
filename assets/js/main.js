@@ -51,14 +51,43 @@ document.addEventListener('DOMContentLoaded', () => {
     animationTargets.forEach(el => observer.observe(el));
   }
 
-  /* ── Email form handler — submits to Kit (ConvertKit) ── */
-  const KIT_FORM_ID = '53e5c9f80a';
-  const KIT_URL = `https://app.kit.com/forms/${KIT_FORM_ID}/subscriptions`;
+  /* ── Email form handler — submits to Kit via hidden iframe (bypasses CORS) ── */
+  const KIT_URL = 'https://app.kit.com/forms/53e5c9f80a/subscriptions';
+
+  function submitToKit(email) {
+    // Create a hidden iframe so the POST doesn't navigate the page
+    const iframeName = 'kit-' + Date.now();
+    const iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Create a real form and submit it into the iframe
+    const hiddenForm = document.createElement('form');
+    hiddenForm.method = 'POST';
+    hiddenForm.action = KIT_URL;
+    hiddenForm.target = iframeName;
+
+    const emailInput = document.createElement('input');
+    emailInput.type = 'hidden';
+    emailInput.name = 'email_address';
+    emailInput.value = email;
+    hiddenForm.appendChild(emailInput);
+
+    document.body.appendChild(hiddenForm);
+    hiddenForm.submit();
+
+    // Clean up after submission completes
+    setTimeout(() => {
+      document.body.removeChild(hiddenForm);
+      document.body.removeChild(iframe);
+    }, 5000);
+  }
 
   document.querySelectorAll('.email-form, #doorForm').forEach(form => {
-    form.addEventListener('submit', async e => {
+    form.addEventListener('submit', e => {
       e.preventDefault();
-      const btn  = form.querySelector('.email-btn, .door-sub-btn');
+      const btn   = form.querySelector('.email-btn, .door-sub-btn');
       const input = form.querySelector('input[type="email"]');
 
       if (!input?.value || !input.value.includes('@')) {
@@ -66,26 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Optimistic UI while submitting
-      const originalText = btn?.textContent;
-      if (btn) { btn.textContent = 'Subscribing…'; btn.disabled = true; }
-      if (input) input.disabled = true;
+      submitToKit(input.value.trim());
 
-      try {
-        const body = new FormData();
-        body.append('email_address', input.value.trim());
-
-        const res = await fetch(KIT_URL, { method: 'POST', body });
-
-        if (res.ok || res.status === 200 || res.redirected) {
-          if (btn) { btn.textContent = 'You\'re in ✓'; btn.classList.add('sent'); }
-        } else {
-          throw new Error('Kit returned ' + res.status);
-        }
-      } catch {
-        // Fallback: still show success (Kit submissions often return opaque responses)
-        if (btn) { btn.textContent = 'You\'re in ✓'; btn.classList.add('sent'); }
-      }
+      // Update UI immediately — Kit confirms via email to the subscriber
+      if (btn)   { btn.textContent = 'You\'re in ✓'; btn.classList.add('sent'); btn.disabled = true; }
+      if (input) { input.disabled = true; }
     });
   });
 
