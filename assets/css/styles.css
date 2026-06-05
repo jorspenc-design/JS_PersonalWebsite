@@ -407,6 +407,19 @@ section { padding-block: var(--section-pad); }
   transition: color var(--ease);
 }
 .hero-secondary:hover { color: var(--slate); text-decoration: none; }
+.hero-consult {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero-consult-label {
+  font-size: 13px;
+  color: var(--warm-grey);
+  line-height: 1.5;
+  max-width: 36ch;
+  margin: 0;
+  text-shadow: 0 0 18px rgba(247,243,237,0.95), 0 0 36px rgba(247,243,237,0.80);
+}
 
 /* 11 — ROMAN ROAD PULL SECTION
 ───────────────────────────────── */
