@@ -3,19 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Writing — Joshua Spence</title>
+  <title>Writing · Joshua Ross Spence</title>
   <meta name="description" content="Essays on AI, ministry, and the work of building well. Slow thinking for leaders who'd rather get it right than get it fast.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#101915">
+  <link rel="canonical" href="https://joshuaspence.org/writing.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Joshua Ross Spence">
+  <meta property="og:title" content="Writing · Joshua Ross Spence">
+  <meta property="og:description" content="Essays on AI, ministry, and the work of building well. Slow thinking for leaders who'd rather get it right than get it fast.">
+  <meta property="og:url" content="https://joshuaspence.org/writing.html">
+  <meta property="og:image" content="https://joshuaspence.org/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="assets/fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-500-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/flag.js"></script>
 </head>
 <body>
 
   <!-- NAV -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Joshua Spence</a>
+      <a href="index.html" class="nav-logo" aria-label="Joshua Ross Spence, home"><span class="mono" aria-hidden="true">JS</span><span class="nav-name">Joshua Ross Spence</span></a>
       <ul class="nav-links" role="list">
         <li><a href="about.html">About</a></li>
         <li><a href="writing.html">Writing</a></li>
@@ -40,7 +52,8 @@
   <main>
 
     <!-- HERO -->
-    <section style="padding:0;">
+    <section class="page-hero-wrap">
+      <img class="hero-bg" src="assets/img/bg-library.jpg" alt="" aria-hidden="true">
       <div class="container">
         <div class="page-hero">
           <span class="overline">Writing</span>
@@ -68,8 +81,8 @@
           <article class="essay-item" id="roman-road">
             <p class="essay-meta">Essay · 2025</p>
             <a href="roman-road.html" class="essay-title">The Roman Road</a>
-            <span class="essay-subtitle">Why AI might be the providential infrastructure of our generation — and why that should make us careful, not excited.</span>
-            <p class="essay-excerpt">Every generation receives an infrastructure it didn't build but must steward. The Romans didn't invent roads to spread the gospel — but roads spread the gospel anyway. The question before the church now isn't whether to use AI. It's whether we'll be the ones who decide how.</p>
+            <span class="essay-subtitle">Why AI might be the providential infrastructure of our generation, and why that should make us careful, not excited.</span>
+            <p class="essay-excerpt">Every generation receives an infrastructure it didn't build but must steward. The Romans didn't invent roads to spread the gospel, but roads spread the gospel anyway. The question before the church now isn't whether to use AI. It's whether we'll be the ones who decide how.</p>
             <a href="roman-road.html" class="essay-read">Read the essay →</a>
           </article>
 
@@ -87,7 +100,7 @@
             <p class="essay-meta">Essay · Coming soon <span class="tag-coming">Soon</span></p>
             <span class="essay-title">The Quiet Pastor and the Loud Machine</span>
             <span class="essay-subtitle">On resisting the formation pressure of AI without rejecting its usefulness.</span>
-            <p class="essay-excerpt">The machine is not neutral. Every tool forms the person who uses it. The question isn't whether AI will shape how you think — it will. The question is whether you'll notice, and whether that formation will be intentional.</p>
+            <p class="essay-excerpt">The machine is not neutral. Every tool forms the person who uses it. The question isn't whether AI will shape how you think. It will. The question is whether you'll notice, and whether that formation will be intentional.</p>
           </article>
 
           <!-- Essay 4: Coming soon -->
@@ -95,7 +108,7 @@
             <p class="essay-meta">Essay · Coming soon <span class="tag-coming">Soon</span></p>
             <span class="essay-title">Stewardship Is a Technology Word Now</span>
             <span class="essay-subtitle">Reframing how the church should talk about adopting new tools.</span>
-            <p class="essay-excerpt">We already have a theological framework for this. We've had it for centuries. The church just hasn't applied it to software yet — and that gap is costing us clarity in the very moment we need it most.</p>
+            <p class="essay-excerpt">We already have a theological framework for this. We've had it for centuries. The church just hasn't applied it to software yet, and that gap is costing us clarity in the very moment we need it most.</p>
           </article>
 
           <!-- Essay 5: Coming soon -->
@@ -116,7 +129,7 @@
         <div class="email-inner fade-up">
           <span class="overline">Newsletter</span>
           <h2>New essays straight to your inbox.</h2>
-          <p>Most weeks I send a short note — sometimes a new essay, sometimes a reflection, sometimes something I'm reading. No hype. No hustle. Just the kind of thinking I'd share over coffee.</p>
+          <p>Most weeks I send a short note. Sometimes a new essay, sometimes a reflection, sometimes something I'm reading. No hype. No hustle. Just the kind of thinking I'd share over coffee.</p>
           <iframe name="kit-frame" style="display:none;" aria-hidden="true" title="Kit form target"></iframe>
           <form class="email-form" action="https://app.kit.com/forms/9468211/subscriptions" method="post" target="kit-frame" novalidate>
             <input type="email" name="email_address" class="email-input" placeholder="Your email address" required aria-label="Email address">
@@ -133,6 +146,10 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-inner">
+        <div class="footer-mark">
+          <span class="mono" aria-hidden="true">JS</span>
+          <span class="italic-line">Christ and him crucified</span>
+        </div>
         <nav class="footer-links" aria-label="Footer navigation">
           <a href="about.html">About</a>
           <a href="writing.html">Writing</a>
@@ -144,12 +161,12 @@
         <div class="footer-divider"></div>
         <div class="footer-meta">
           <span>Lexington, Kentucky</span>
-          <span>&copy; 2025 Joshua Spence</span>
+          <span>&copy; 2026 Joshua Ross Spence</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>

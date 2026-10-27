@@ -1,4 +1,6 @@
-/* Joshua Spence — joshuaspence.com */
+/* Joshua Ross Spence · joshuaspence.org */
+
+document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', () => {
 
